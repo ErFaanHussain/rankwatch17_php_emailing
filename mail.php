@@ -43,7 +43,7 @@
             <label class="col-form-label" for="message">Enter the Message</label>
             <textarea class="form-control" rows="3" name="message" value=""></textarea>
           </div>
-          <!--  -->
+          <!-- This div used to alert user of errors or success message -->
           <div id="Alert" role="alert"></div>
           <div class="form-group">
           <div class="text-center">
@@ -74,11 +74,11 @@ if(isset($_POST["send"])){
     else{
       //Used Composer to resolve Mandrill library dependency, Mandrill library provides Mandrill/MailChimp API
       require_once 'vendor/autoload.php';
-      $from_email = "me@erfaanhussain.co";
+      $from_email = "me@erfaanhussain.co"; //Mandrill account is configured with my personal domain erfaanhussain.co
       $from_name = "ErFaan Hussain";
       try {
-          $mandrill = new Mandrill('CazWu1bgRBeJthD4WQ8XLw');
-          $message = array(
+          $mandrill = new Mandrill('CazWu1bgRBeJthD4WQ8XLw'); //new instamce of Mandrill, supplied with secret Mandril API Key
+          $message = array( //associative array to contain all the parameters for email
               'html' => '<p>' .$mes . '</p>',
               'text' => $mes,
               'subject' => $subject,
@@ -94,11 +94,11 @@ if(isset($_POST["send"])){
               'headers' => array('Reply-To' => $from_email)
           );
           //if set to true email will be sent asyncronously in background , it is moved to queue and result is immediatey returned
-          $async = false;
+          $async = false; //set to false to synchronously send the email
           $ip_pool = 'Main Pool';
           //$send_at, when to send the email, mandrill also provides facility to schedule email for a future date
           $send_at = date("Y-m-d h:i:s");
-          $test = new DateTime('08/18/2016');
+          $test = new DateTime('08/18/2016'); //providing a previous date, it will be sent immediately
           $send_at = date_format($test, 'Y-m-d h:i:s');
           //message is sent using object of Mandrill Class (provided by Mandrill API)
           $result = $mandrill->messages->send($message, $async, $ip_pool, $send_at);
