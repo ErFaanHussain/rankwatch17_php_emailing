@@ -17,6 +17,7 @@
   </nav>
 </div>
 <div class="container">
+	<!-- using only half of container and input fields centered on page -->
 	<div class="col-md-6 mx-auto mt-5" >
     <ul class="nav nav-tabs">
 			<li class="nav-item">
@@ -60,6 +61,7 @@
 </html>
 <?php
 if(isset($_POST["send"])){
+	// checking the input parameters
   if(isset($_POST["subject"]) && isset($_POST["message"]) && isset($_POST["email"]) && isset($_POST["r_Name"])){
     $recipient_name = $_POST["r_Name"];
     $email = $_POST["email"];
